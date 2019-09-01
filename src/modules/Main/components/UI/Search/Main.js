@@ -1,5 +1,5 @@
 import React from 'react'
-import { TopNavSearch } from 'webplatform-ui'
+import { TopNavSearch } from '@app-init/ui'
 
 export default class WelcomeTopNavSearch extends React.Component {
   constructor(props) {

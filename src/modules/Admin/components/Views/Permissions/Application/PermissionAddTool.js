@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Button, Inputs, Card} from 'webplatform-ui'
+import {Button, Inputs, Card} from '@app-init/ui'
 
 class UserAddTool extends Component {
   render() {

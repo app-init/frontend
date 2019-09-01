@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import Waves from 'node-waves'
 
-import { History, Utils, Router } from 'webplatform-ui'
+import { History, Utils, Router } from '@app-init/ui'
 
 const history = History.setHistory()
 const utils = new Utils()

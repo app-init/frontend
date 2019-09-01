@@ -11,8 +11,8 @@ import configDevServer from '../webpack/webpack.server'
 import parseArgs from './parse-args'
 
 export function cli(args) {
-  let command = shell.exec('webplatform-cli config get variables', {silent: true})
-  let apps = JSON.parse(command)['applications-configs']
+  let command = shell.exec('appinit config get variables', {silent: true})
+  let routes = JSON.parse(command)['route-configs']
   
   let options = parseArgs(args)
   let webpackConfig = options.production ? webpackProdConfig : webpackDevConfig
@@ -38,10 +38,10 @@ export function cli(args) {
     webpackConfig.plugins.push(analyzer)
   }
 
-  for (let i in apps) {
-    let appConfig = apps[i].frontend
-    if (apps[i].active) {
-      webpackConfig.resolve.alias[appConfig.name] = resolve(appConfig.path)
+  for (let i in routes) {
+    let routeConfig = apps[i].frontend
+    if (routes[i].active) {
+      webpackConfig.resolve.alias[routeConfig.name] = resolve(routeConfig.path)
     }
   }
   
@@ -57,19 +57,15 @@ export function cli(args) {
   if (options.debug) {
     console.log(webpackConfig)
   }
-
+  
   let compilerCallback = (err, stats) => {
     console.log(stats.toString(statsOptions))
   }
 
-  if (options.production) {
-    compiler.run((err, stats) => compilerCallback)
+  if (options.production || options.build) {
+    compiler.run(compilerCallback)
   } else {
-    if (options.build) {
-      compiler.run((err, stats) => compilerCallback)
-    } else {
-      let server = new webpackDevServer(compiler, configDevServer)
-      server.listen(options.port, "localhost", function() {})
-    }
+    let server = new webpackDevServer(compiler, configDevServer)
+    server.listen(options.port, "localhost", function() {})
   }
 }

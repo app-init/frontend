@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 import { Scrollbars } from 'react-custom-scrollbars'
-import { Card, Tabs, FormatDate } from 'webplatform-ui'
+import { Card, Tabs, FormatDate } from '@app-init/ui'
 
 export default class Main extends Component {
   constructor(props) {

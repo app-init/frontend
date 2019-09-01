@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Cookies from 'universal-cookie'
-import { Utils, Layout, Loading } from 'webplatform-ui'
+import { Utils, Layout, Loading } from '@app-init/ui'
 // import { Layout } from '~/components/Core/Layout'
 // import Loading from '~/components/Core/Loading'
 

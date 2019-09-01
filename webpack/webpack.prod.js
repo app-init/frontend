@@ -36,11 +36,13 @@ const react = [
 ];
 
 const  checkPackage = function(packages, module) {
+  // console.log(module.context)
   if (module.context.indexOf('node_modules') === -1) {
     return false;
   }
   
   const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+  // console.log(packageName)
 
   for (let i in packages) {
     if (packageName.indexOf(packages[i]) > -1) {
@@ -53,18 +55,19 @@ const  checkPackage = function(packages, module) {
 
 const vendorsChunk = function(module, chunk) {
   if (module.type === 'javascript/auto' 
-    && module.context.indexOf('webplatform-ui') === -1
+    && module.context.indexOf('@app-init/ui') === -1
     // && module.context.indexOf('routes') === -1
     && module.context.indexOf(resolve(__dirname, '../src')) === -1) {
-    let command = shell.exec('webplatform-cli config get variables', {silent: true});
+    let command = shell.exec('appinit config get variables', {silent: true});
     let config = JSON.parse(command);
 
     if (module.context.indexOf(config['apps-path']) > -1) {
       return false;
     }
 
+    // console.log(module.context)
     let plugins = moment.concat(react);
-    plugins.push('webplatform-ui');
+    // plugins.push('@app-init/ui');
 
     return !checkPackage(plugins, module);
   } else {
@@ -78,6 +81,15 @@ const reactChunk = function(module, chunk) {
 
 const momentChunk = function(module, chunk) {
   return checkPackage(moment, module);
+}
+
+const appInitUIChunk = function(module, chunk) {
+  if (module.type === 'javascript/auto' 
+    && module.context.indexOf('@app-init/ui') > -1) {
+    return true;
+  }
+
+  return false;
 }
 
 const defaultRoutesChunk = function(module, chunk) {
@@ -124,13 +136,15 @@ module.exports = merge(common, {
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
-        vendors: false,
+        // vendors: false,
         vendor: {
           chunks: 'all',
-          maxInitialRequests: Infinity,
+          // maxInitialRequests: Infinity,
           minSize: 0,
+          // test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
           test: vendorsChunk,
-          name: 'vendors',
+          name: 'vendor',
+          // enforce: true,
         },
         react: {
           chunks: 'all',
@@ -148,6 +162,12 @@ module.exports = merge(common, {
           chunks: 'all',
           name: 'default-routes',
           test: defaultRoutesChunk,
+          enforce: true,
+        },
+        'app-init': {
+          chunks: 'all',
+          name: 'app-init',
+          test: appInitUIChunk,
           enforce: true,
         },
         // This adds more bloat then having the common modules spread out

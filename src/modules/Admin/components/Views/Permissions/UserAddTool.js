@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button } from 'webplatform-ui'
+import { Button } from '@app-init/ui'
 
 class UserAddTool extends Component {
   render() {

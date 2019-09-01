@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, DropDown, Utils } from 'webplatform-ui'
+import { Card, DropDown, Utils } from '@app-init/ui'
 import TemplateTable from './Table'
 
 class Main extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import Utils from '~/utils'
-import { Button, Inputs, ToolsWidget, Card } from 'webplatform-ui'
+import { Button, Inputs, ToolsWidget, Card } from '@app-init/ui'
 
 class Main extends Component {
   constructor(props) {

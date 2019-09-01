@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Tabs } from 'webplatform-ui'
+import { Tabs } from '@app-init/ui'
 
 class Main extends Component {
   constructor(props) {

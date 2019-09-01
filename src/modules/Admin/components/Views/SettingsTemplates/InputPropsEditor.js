@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Button, Inputs } from 'webplatform-ui'
+import { Card, Button, Inputs } from '@app-init/ui'
 
 class InputPropsEditor extends Component {
   constructor(props) {

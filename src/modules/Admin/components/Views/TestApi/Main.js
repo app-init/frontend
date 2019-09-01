@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Json, Button, Inputs, Utils } from 'webplatform-ui'
+import { Json, Button, Inputs, Utils } from '@app-init/ui'
 
 class TestAPI extends Component {
   constructor(props) {

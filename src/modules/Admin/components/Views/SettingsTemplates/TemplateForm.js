@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
-import { Card, Button, Inputs, Form, Collapse, Label, Utils } from 'webplatform-ui'
+import { Card, Button, Inputs, Form, Collapse, Label, Utils } from '@app-init/ui'
 import ValuesEditor from './ValuesEditor'
 import InputPropsEditor from './InputPropsEditor'
 import { connect } from 'react-redux'

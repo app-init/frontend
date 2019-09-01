@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Utils } from 'webplatform-ui'
+import { Utils } from '@app-init/ui'
 import Main from '../../../components/Views/Permissions/Application/Application'
 
 export default class MainContainer extends Component {

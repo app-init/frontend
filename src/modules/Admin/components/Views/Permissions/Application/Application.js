@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { Button, Inputs, Pagination, Tabs, ToolsWidget, Link, Card, Utils } from 'webplatform-ui'
+import { Button, Inputs, Pagination, Tabs, ToolsWidget, Link, Card, Utils } from '@app-init/ui'
 import PermissionAddTool from './PermissionAddTool'
 
 class Main extends Component {

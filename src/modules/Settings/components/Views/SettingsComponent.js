@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Tabs } from 'webplatform-ui'
+import { Card, Tabs } from '@app-init/ui'
 import Section from './Section'
 
 export default class Settings extends Component {

@@ -13,7 +13,6 @@ module.exports = {
           }
         ],
         "@babel/plugin-syntax-dynamic-import",
-        "lodash"
       ]
     },
     production: {
@@ -21,8 +20,7 @@ module.exports = {
         "@babel/preset-react"
       ],
       plugins: [
-        "@babel/plugin-transform-runtime",
-        "lodash"
+        "@babel/runtime",
       ]
     }
   }

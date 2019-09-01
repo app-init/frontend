@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
-import { FormatDate, Pagination } from 'webplatform-ui'
+import { FormatDate, Pagination } from '@app-init/ui'
 
 export default class SearchResults extends Component {
   constructor(props) {

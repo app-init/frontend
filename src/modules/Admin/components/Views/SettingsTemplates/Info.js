@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
-import { Card, DropDown, ToolsWidget, Utils } from 'webplatform-ui'
+import { Card, DropDown, ToolsWidget, Utils } from '@app-init/ui'
 // import AddContainer from '../containers/AddContainer'
 import TemplateFormContainer from '../../../containers/SettingsTemplates/TemplateFormContainer'
 

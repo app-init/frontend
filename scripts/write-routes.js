@@ -11,8 +11,8 @@ export function cli(args) {
   let options = parseArgs(args)
   let webpackConfig = options.production ? webpackProdConfig : webpackDevConfig
   
-  let apps = []
-  let command = shell.exec('webplatform-cli config get variables', {silent: true})
+  let routes = []
+  let command = shell.exec('appinit config get variables', {silent: true})
   let config = JSON.parse(command)
   
   let routes = ['// FILE IS AUTOMATICALLY GENERATED', '// DO NOT CHANGE\n']
@@ -21,12 +21,12 @@ export function cli(args) {
   for (let i in template) {
     let line = template[i]
     if (line.indexOf('INSERT HERE') > 0) {
-      if (config['applications-configs'].length > 0) {
-        for (let i in config['applications-configs']) {
-          let appConfig = config['applications-configs'][i].frontend
+      if (config['route-configs'].length > 0) {
+        for (let i in config['route-configs']) {
+          let routeConfig = config['route-configs'][i].frontend
         
-          if (config['applications-configs'][i].active) {
-            routes.push(`  () => import(/* webpackChunkName: "${appConfig.name}", webpackPrefetch: true */ '${appConfig.name}/routes'),`)
+          if (config['route-configs'][i].active) {
+            routes.push(`  () => import(/* webpackChunkName: "${routeConfig.name}", webpackPrefetch: true */ '${routeConfig.name}/routes'),`)
           }
         }
       }

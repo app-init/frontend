@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import Logs from '../../components/Views/Logs/Main'
 import SearchResults from '../../components/Views/Logs/SearchResults'
-import { Pagination, Utils } from 'webplatform-ui'
+import { Pagination, Utils } from '@app-init/ui'
 
 class LogsContainer extends Component {
   constructor(props) {

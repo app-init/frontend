@@ -1,5 +1,5 @@
 import React from 'react'
-import { Utils } from 'webplatform-ui'
+import { Utils } from '@app-init/ui'
 
 export default class UserStateTitle extends React.Component {
   constructor(props) {

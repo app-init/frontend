@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Inputs, Pagination, Link, Utils } from 'webplatform-ui'
+import { Inputs, Pagination, Link, Utils } from '@app-init/ui'
 import Main from '../../components/Views/Permissions/Main'
 
 class MainContainer extends Component {

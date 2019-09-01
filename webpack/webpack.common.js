@@ -8,14 +8,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const shell = require('shelljs');
 const devMode = process.env.NODE_ENV !== 'production';
 
-const webplatformChunk = function(module, chunk) {
-  if (module.type === 'javascript/auto' && module.context.indexOf('webplatform-ui') > -1) {
-    return true;
-  }
-
-  return false;
-}
-
 module.exports = {
   context: resolve(__dirname, '../src/'),
   entry: {
@@ -32,7 +24,8 @@ module.exports = {
     modules: [resolve(__dirname, '../node_modules/')],
     alias: {
       '~': resolve(__dirname, '../src/')
-    }
+    },
+    symlinks: false
   },
   module: {
     rules: [
@@ -92,7 +85,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new GenerateSW({
-      chunks: ["App", "vendors", "webplatform-ui"]
+      chunks: ["App", "vendors", "app-init-ui"]
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
@@ -111,15 +104,13 @@ module.exports = {
       chunks: 'all',
       cacheGroups: {
         vendors: {
-          // test: /[\\/]node_modules[\\/]/i,
           test: (module, chunk) => {
-            if (module.context.indexOf('node_modules') > -1 && module.constructor.name !== 'CssModule') {
+            if ((module.context.indexOf('node_modules') > -1 || module.context.indexOf('@app-init/ui') > -1)
+              && module.constructor.name !== 'CssModule') {
               return true;
             }
-
-            return false
+            return false;
           },
-          chunks: "all"
         },
         styles: {
           name: 'styles-chunk',
@@ -129,17 +120,6 @@ module.exports = {
           reuseExistingChunk: true,
           enforce: true,
         },
-        webplatform: {
-          chunks: 'all',
-          name: 'webplatform-ui',
-          test: webplatformChunk,
-          enforce: true,
-        },
-        // commons: {
-        //   name: "commons",    // The name of the chunk containing all common code
-        //   chunks: "initial", 
-        //   minChunks: 2        // This is the number of modules
-        // }
       }
     },
     runtimeChunk: {
