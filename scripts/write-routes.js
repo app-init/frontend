@@ -11,7 +11,6 @@ export function cli(args) {
   let options = parseArgs(args)
   let webpackConfig = options.production ? webpackProdConfig : webpackDevConfig
   
-  let routes = []
   let command = shell.exec('appinit config get variables', {silent: true})
   let config = JSON.parse(command)
   
