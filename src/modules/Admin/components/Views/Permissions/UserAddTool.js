@@ -29,7 +29,7 @@ class UserAddTool extends Component {
                   <label>User Id</label>
                 </div>
                 <div className="col-lg-6">
-                  <label>Application</label>
+                  <label>Route</label>
                 </div>
               </div>
               <div className="row">
@@ -38,7 +38,7 @@ class UserAddTool extends Component {
                   {this.props.newUsersAutoComp}
                 </div>
                 <div className="col-lg-6">
-                  {this.props.applicationsAutoComp}
+                  {this.props.routesAutoComp}
                   {/* <Inputs.Text value={ this.props.newUser.application } onChange={ (event) => this.props.newUserChange(event, 'application') } /> */}
                 </div>
               </div>

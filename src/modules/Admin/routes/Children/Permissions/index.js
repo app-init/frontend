@@ -2,10 +2,10 @@
 import Main from './Main'
 import User from './User'
 import Api from './Api'
-import Application from './Application'
+import Route from './Route'
 
 export default [
-  Application,
+  Route,
   Main,
   User,
   Api,

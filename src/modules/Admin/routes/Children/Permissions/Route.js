@@ -1,16 +1,16 @@
 import UI from '../../../components/UI'
 import PermissionsReducer from '~/modules/Admin/reducers/Permissions'
 
-let applicationContainer = () => import(/* webpackChunkName: "Admin", webpackPrefetch: true */ '../../../containers/Permissions/Application/MainContainer')
+let routeContainer = () => import(/* webpackChunkName: "Admin", webpackPrefetch: true */ '../../../containers/Permissions/Route/MainContainer')
 
 var route = {
   route: {
-    path: '/permissions/application/:name',
+    path: '/permissions/routes/:name',
     exact: true,
   },
   ui: {
-    stateTitle: UI.StateTitle.Permissions.Application,
-    content: applicationContainer
+    stateTitle: UI.StateTitle.Permissions.Route,
+    content: routeContainer
   },
   reducer: {
     name: 'permissions',
@@ -18,7 +18,7 @@ var route = {
   },
 
   mapStateToProps: (state) => {
-    let stateObj = state.permissions.application
+    let stateObj = state.permissions.route
 
     return {
       permissions: stateObj.permissions,
@@ -29,9 +29,9 @@ var route = {
   api: (utils, match) => {
     const api = {
       permissions: {
-        path: 'permissions.applications.get',
+        path: 'permissions.routes.get',
         data: {
-          application: match.params.name
+          route: match.params.name
         }
       },
       users: {
@@ -45,7 +45,7 @@ var route = {
         return data.users.then(users => {
           let action = { permissions, users }
 
-          utils.dispatch('INIT', action, 'permissions.application')
+          utils.dispatch('INIT', action, 'permissions.routes')
 
           return action
         })

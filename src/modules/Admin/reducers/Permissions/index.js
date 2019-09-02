@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import Api from './Api'
-import Application from './Application'
+import Route from './Route'
 import User from './User'
 
 let initState = {
@@ -33,7 +33,7 @@ const Permissions = combineReducers({
   main: PermissionsReducer,
   api: Api,
   user: User,
-  application: Application,
+  route: Route,
 })
 
 export default Permissions

@@ -25,7 +25,7 @@ class Main extends Component {
               <Card.Body>
                 <div className="row">
                   <div className="col-lg-12 text-center">
-                    <h3>Permissions by application</h3>
+                    <h3>Permissions by route</h3>
                   </div>
                 </div>
                 <br />
@@ -59,7 +59,7 @@ class Main extends Component {
     )
   }
 
-  renderAddAppTool() {
+  renderAddRouteTool() {
     return (
       <ToolsWidget current={this.props.tool}>
         <div key="hide" />
@@ -70,7 +70,7 @@ class Main extends Component {
                 <Card.Title className="bg-green">
                   <div className="row">
                     <div className="col-lg-6">
-                      <h3 className="c-white">Add New Application</h3>
+                      <h3 className="c-white">Add New Route</h3>
                     </div>
                     <div className="col-lg-6 text-right">
                       <Button
@@ -84,13 +84,13 @@ class Main extends Component {
                 <Card.Body>
                   <div className="row">
                     <div className="col-lg-6">
-                      <label>Application Name</label>
+                      <label>Route Name</label>
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-lg-3">
                       <Inputs.Text
-                        value={this.props.newApplication}
+                        value={this.props.newRoute}
                         onChange={event => this.props.handleChange(event)}
                       />
                     </div>
@@ -98,7 +98,7 @@ class Main extends Component {
                       <Button
                         icon="zmdi zmdi-plus"
                         btnStyle="success"
-                        onClick={() => this.props.addNewApplication()}
+                        onClick={() => this.props.addNewRoute()}
                       />
                     </div>
                   </div>
@@ -112,7 +112,7 @@ class Main extends Component {
     )
   }
 
-  renderAddAppButton() {
+  renderAddRouteButton() {
     // const isAdmin = this.user.permissions.system['is_admin']
     const isAdmin = this.user.permissions_obj.system['is_admin']
     if (!isAdmin) {

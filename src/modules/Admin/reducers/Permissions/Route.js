@@ -1,6 +1,6 @@
-function Application(state = {}, action) {
+function Route(state = {}, action) {
   switch (action.type) {
-    case 'PERMISSIONS_APPLICATION_INIT':
+    case 'PERMISSIONS_ROUTES_INIT':
       var newState = {...state}
 
       if (action.permissions !== undefined) {
@@ -17,4 +17,4 @@ function Application(state = {}, action) {
   }
 }
 
-export default Application
+export default Route

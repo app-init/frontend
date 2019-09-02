@@ -92,13 +92,13 @@ class Main extends Component {
     return permissions
   }
 
-  renderTabHeader(appPermissions) {
+  renderTabHeader(routePermissions) {
     const labels = {
       admin: <i className="fa fa-key" />,
       moderator: <i className="fa fa-shield" />,
     }
 
-    return Object.keys(appPermissions).sort().map(permission => {
+    return Object.keys(routePermissions).sort().map(permission => {
       const label =
         labels[permission] === undefined ? <i className="fa fa-lock" /> : labels[permission]
 
@@ -117,8 +117,8 @@ class Main extends Component {
       return <div />
     }
 
-    const appPermissions = this.props.permissions
-    const permissions = this.mergePermissions(appPermissions)
+    const routePermissions = this.props.permissions
+    const permissions = this.mergePermissions(routePermissions)
 
     const tabs = (
       <Tabs fill current="admin">
@@ -126,8 +126,8 @@ class Main extends Component {
           {this.renderTabHeader(permissions)}
         </Tabs.Nav>
         <Tabs.Content>
-          {Object.keys(appPermissions).map(permission => {
-            return <div key={permission}> {this.createTabContent(permission, appPermissions[permission].users || [])} </div>
+          {Object.keys(routePermissions).map(permission => {
+            return <div key={permission}> {this.createTabContent(permission, routePermissions[permission].users || [])} </div>
           })}
         </Tabs.Content>
       </Tabs>
@@ -302,7 +302,7 @@ class Main extends Component {
               btnStyle="primary"
               onClick={() => {
                 this.props.handleDescriptionEdit(
-                  this.props.application,
+                  this.props.route,
                   permission,
                   this.state.newDescriptions[permission]
                 )
@@ -373,7 +373,7 @@ class Main extends Component {
 
   render() {
     // console.log('app props at render: ', this.props)
-    console.log('app state at render: ', this.state)
+    console.log('route state at render: ', this.state)
     return (
       <div>
         <div>

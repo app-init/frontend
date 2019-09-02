@@ -22,8 +22,8 @@ class Main extends Component {
               <Card.Body className="card-padding">
                 <div className="row">
                   <div className="col-lg-12">
-                    <label>Application</label>
-                    <h3>{ this.props.formData.application } </h3>
+                    <label>Route</label>
+                    <h3>{ this.props.formData.route } </h3>
                   </div>
                 </div>
                 <br />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 
-class Application extends Component {
+class Route extends Component {
   constructor(props) {
     super(props)
   }
@@ -15,4 +15,4 @@ class Application extends Component {
   }
 }
 
-export default Application
+export default Route

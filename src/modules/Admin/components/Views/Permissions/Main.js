@@ -40,10 +40,10 @@ class Main extends Component {
     )
   }
 
-  renderApplicationsView() {
+  renderRoutesView() {
     return (
-      <div id="applications" key="applications">
-        {this.props.applicationsList}
+      <div id="routes" key="routes">
+        {this.props.routesList}
       </div>
     )
   }
@@ -68,16 +68,16 @@ class Main extends Component {
                     <i className="fa fa-cubes" /> Modules
                   </span>
                 </a>
-                <a target="applications">
+                <a target="routes">
                   <span>
-                    <i className="fa fa-th-large" /> Applications
+                    <i className="fa fa-th-large" /> Routes
                   </span>
                 </a>
               </Tabs.Nav>
               <Tabs.Content>
                 <div key="users">{this.renderUserView()}</div>
                 <div key="modules">{this.renderModulesView()}</div>
-                <div key="applications">{this.renderApplicationsView()}</div>
+                <div key="routes">{this.renderRoutesView()}</div>
               </Tabs.Content>
             </Tabs>
           </div>

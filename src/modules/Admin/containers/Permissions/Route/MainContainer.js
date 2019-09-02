@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { Utils } from '@app-init/ui'
-import Main from '../../../components/Views/Permissions/Application/Application'
+import Main from '../../../components/Views/Permissions/Route/Route'
 
 export default class MainContainer extends Component {
   constructor(props) {
     super(props)
-    this.utils = new Utils('permissions.application')
+    this.utils = new Utils('permissions.routes')
   }
 
   handleUserAdd(uid, permission) {
     const api = {
-      path: 'permissions.applications.add',
+      path: 'permissions.routes.add',
       data: {
         uid: uid,
-        application: this.props.match.params.name,
+        route: this.props.match.params.name,
         permission,
       },
     }
@@ -23,11 +23,11 @@ export default class MainContainer extends Component {
     })
   }
 
-  handleDescriptionEdit(application, permission, description) {
+  handleDescriptionEdit(route, permission, description) {
     const api = {
       path: 'permissions.descriptions.edit',
       data: {
-        application,
+        route,
         permission,
         description,
       }
@@ -39,14 +39,14 @@ export default class MainContainer extends Component {
   }
 
   render() {
-    let application = this.props.match.params.name
+    let route= this.props.match.params.name
     return (
       <Main
-        application={application}
+        route={route}
         permissions={this.props.permissions}
         handleUserAdd={(uid, perm) => this.handleUserAdd(uid, perm)}
-        handleDescriptionEdit={(app, perm, description) =>
-          this.handleDescriptionEdit(app, perm, description)}
+        handleDescriptionEdit={(route, perm, description) =>
+          this.handleDescriptionEdit(route, perm, description)}
         users={this.props.users}
       />
     )

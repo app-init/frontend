@@ -18,7 +18,7 @@ class MainContainer extends Component {
       pages: {
         users: 1,
         modules: 1,
-        applications: 1,
+        routes: 1,
       },
       filteredUsers: props.users,
       filteredApis: props.apis
@@ -27,26 +27,26 @@ class MainContainer extends Component {
   }
 
   setup() {
-    this.applicationsAutoComp = this.makeAppAutoComp()
+    this.routesAutoComp = this.makeRouteAutoComp()
     this.usersAutoComp = this.makeUsersAutoComp()
     this.apisAutoComp = this.makeApisAutoComp()
   }
 
-  // Construction of application autocomplete
-  makeAppAutoComp() {
+  // Construction of route autocomplete
+  makeRouteAutoComp() {
     return (
       <Inputs.Autocomplete
-        placeholder="Enter application"
+        placeholder="Enter route"
         minSearch={1}
         data={this.props.apps}
         searchKey={'name'}
         onChange={(result) => {
-          this.application = ''
+          this.route = ''
           if (result.result !== undefined) {
-            this.application = result.result
+            this.route = result.result
           }
         }}
-        searchText={this.searchText.application}
+        searchText={this.searchText.route}
       />
     )
   }
@@ -234,7 +234,7 @@ class MainContainer extends Component {
           <td>
             <Link to={`/admin/permissions/api/${api.safe_name}`}>{api.module}</Link>
           </td>
-          <td>{api.application}</td>
+          <td>{api.route}</td>
         </tr>
       )
     })
@@ -245,7 +245,7 @@ class MainContainer extends Component {
           <thead>
             <tr>
               <td>Module</td>
-              <td>Application</td>
+              <td>Route</td>
             </tr>
           </thead>
           <tbody>
@@ -257,12 +257,12 @@ class MainContainer extends Component {
     )
   }
 
-  makeApplicationsList() {
-    var body = this.getItemsOnPage(this.props.apps, 'applications').map((app) => {
+  makeRoutesList() {
+    var body = this.getItemsOnPage(this.props.routes, 'routes').map((route) => {
       return (
-        <tr key={app.name}>
+        <tr key={route.name}>
           <td>
-            <Link to={`/admin/permissions/application/${app.name}`}>{app.name}</Link>
+            <Link to={`/admin/permissions/routes/${route.name}`}>{route.name}</Link>
           </td>
         </tr>
       )
@@ -273,14 +273,14 @@ class MainContainer extends Component {
         <table className="table table-hover">
           <thead>
             <tr>
-              <td>Application</td>
+              <td>Route</td>
             </tr>
           </thead>
           <tbody>
             {body}
           </tbody>
         </table>
-        {this.renderPagination('applications', this.props.apps.length)}
+        {this.renderPagination('routes', this.props.routes.length)}
       </div>
     )
   }
@@ -324,10 +324,10 @@ class MainContainer extends Component {
 
     return (
       <Main
-        applicationsAutoComp={this.applicationsAutoComp}
+        routesAutoComp={this.routesAutoComp}
         usersAutoComp={this.usersAutoComp}
         apisList={this.makeApisList()}
-        applicationsList={this.makeApplicationsList()}
+        routesList={this.makeRoutesList()}
         apisAutoComp={this.apisAutoComp}
         submitUser={() => this.submitUser()}
         usersList={this.makeUsersList()}

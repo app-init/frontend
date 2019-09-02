@@ -13,11 +13,11 @@ export default class MainContainer extends Component {
     let stateObj = this.props.user
 
     this.state = {
-      applications: stateObj.applications || [],
+      routes: stateObj.routes || [],
       permissions: this.constructPermissionsObj(props),
       inputs: {},
       tool: '',
-      newApplication: '',
+      newRoute: '',
     }
   }
 
@@ -26,19 +26,19 @@ export default class MainContainer extends Component {
     const inputs = {}
 
     //Construct initial dictionary with all values false
-    Object.keys(props.applications).forEach(app => {
-      permissions[app] = {}
-      inputs[app] = ''
+    Object.keys(props.routes).forEach(route => {
+      permissions[route] = {}
+      inputs[route] = ''
 
-      props.applications[app].forEach(perm => {
-        permissions[app][perm] = false
+      props.routes[route].forEach(perm => {
+        permissions[route][perm] = false
       })
     })
 
     //Proceed to filp values to true for supplied permissions
-    Object.keys(props.user.permissions_obj).forEach(app => {
-      props.user.permissions_obj[app].forEach(perm => {
-        permissions[app][perm] = true
+    Object.keys(props.user.permissions_obj).forEach(route => {
+      props.user.permissions_obj[route].forEach(perm => {
+        permissions[route][perm] = true
       })
     })
     return permissions
@@ -50,11 +50,11 @@ export default class MainContainer extends Component {
       const permissions = this.constructPermissionsObj(nextProps)
 
       this.oldPermissions = permissions
-      this.oldApplications = this.user.applications
+      this.oldRoutes = this.user.routes
 
       this.setState({
         permissions,
-        applications: this.user.applications,
+        routes: this.user.routes,
       })
     }
     return true
@@ -62,27 +62,27 @@ export default class MainContainer extends Component {
 
   handleChange(event) {
     this.setState({
-      newApplication: event.target.value,
+      newRoute: event.target.value,
     })
   }
 
   addPermission() {
-    const {permission, application} = this.newPermission
-    if (permission && application) {
-      if (this.props.permissions_obj[application] === undefined) {
+    const {permission, route} = this.newPermission
+    if (permission && route) {
+      if (this.props.permissions_obj[route] === undefined) {
         this.setState({
           inputs: {
-            [application]: '',
+            [route]: '',
           },
-          applications: [...this.state.applications, application],
+          routes: [...this.state.routes, route],
         })
       }
 
       this.setState({
         permissions: {
           ...this.props.permissions_obj,
-          [application]: {
-            ...this.props.permissions_obj[application],
+          [route]: {
+            ...this.props.permissions_obj[route],
             [permission]: true,
           },
         },
@@ -100,29 +100,43 @@ export default class MainContainer extends Component {
     })
   }
 
-  addAppPermission(app) {
-    const newPermission = this.state.inputs[app]
+  addNewRoute() {
+    const route = this.state.newRoute
+    if (route && !this.state.routes.includes(route)) {
+      this.setState({
+        routes: [...this.state.routes, route],
+        permissions: {
+          ...this.state.permissions,
+          [route]: {},
+        },
+        newRoute: '',
+      })
+    }
+  }
+
+  addRoutePermission(route) {
+    const newPermission = this.state.inputs[route]
     if (newPermission) {
 
       let stateObj = this.state
 
-      stateObj.permissions[app][newPermission] = true
-      stateObj.inputs[app] = ''
+      stateObj.permissions[route][newPermission] = true
+      stateObj.inputs[route] = ''
 
       this.setState({...stateObj})
     }
   }
 
-  togglePermission(app, perm) {
+  togglePermission(route, perm) {
     const permissions = this.state.permissions
-    const appPermissions = permissions[app]
+    const routePermissions = permissions[route]
 
-    if (appPermissions === undefined) {
-      console.log('APP PERMISSIONS CAME IN UNDEFINED WHEN TRYING TO TOGGLE')
+    if (routePermissions === undefined) {
+      console.log('ROUTE PERMISSIONS CAME IN UNDEFINED WHEN TRYING TO TOGGLE')
       this.setState({
         permissions: {
           ...permissions,
-          [app]: [
+          [route]: [
             perm,
           ],
         }
@@ -133,7 +147,7 @@ export default class MainContainer extends Component {
       let updatedPermissions = this.state.permissions
 
       //Update toggled value (Flip its value)
-      updatedPermissions[app][perm] = !updatedPermissions[app][perm]
+      updatedPermissions[route][perm] = !updatedPermissions[route][perm]
 
       //Set the newley updated permissions to the container state
       this.setState({
@@ -144,10 +158,10 @@ export default class MainContainer extends Component {
     }
   }
 
-  handleInputChange(text, app) {
+  handleInputChange(text, route) {
     this.setState({
       inputs: {
-        [app]: text,
+        [route]: text,
       },
     })
   }
@@ -155,13 +169,13 @@ export default class MainContainer extends Component {
   createPermissionsComponent() {
     return (
       <Permissions
-        applicationPermissions={this.props.applications}
-        applications={this.props.user.applications}
+        routePermissions={this.props.routes}
+        routes={this.props.user.routes}
         permissions={this.state.permissions}
         inputs={this.state.inputs}
-        togglePermission={(app, perm) => this.togglePermission(app, perm)}
-        handleInputChange={(event, app) => this.handleInputChange(event, app)}
-        addAppPermission={(app) => this.addAppPermission(app)}
+        togglePermission={(route, perm) => this.togglePermission(route, perm)}
+        handleInputChange={(event, route) => this.handleInputChange(event, route)}
+        addRoutePermission={(route) => this.addRoutePermission(route)}
       />
     )
   }
@@ -169,29 +183,29 @@ export default class MainContainer extends Component {
   submitChanges() {
     const permissions_obj = {}
     const permissions = this.state.permissions
-    const applications = [...this.state.applications]
+    const routes = [...this.state.routes]
 
-    Object.keys(permissions).forEach(app => {
-      permissions_obj[app] = []
-      const appPermissions = permissions[app]
-      // adding to applications list so that permission is set for the
-      // new application
-      if (!applications.includes(app)) {
-        applications.push(app)
+    Object.keys(permissions).forEach(route => {
+      permissions_obj[route] = []
+      const routePermissions = permissions[route]
+      // adding to routes list so that permission is set for the
+      // new route
+      if (!routes.includes(route)) {
+        routes.push(route)
       }
 
-      Object.keys(appPermissions)
+      Object.keys(routePermissions)
         // only adding permissions that are checked
-        .filter(perm => appPermissions[perm])
+        .filter(perm => routePermissions[perm])
         .forEach(selectedPerm => {
-          permissions_obj[app].push(selectedPerm)
+          permissions_obj[route].push(selectedPerm)
         })
     })
 
     const data = {
       ...this.props.user,
       permissions_obj,
-      applications: applications,
+      routes: routes,
     }
 
     const api = {
@@ -200,13 +214,13 @@ export default class MainContainer extends Component {
     }
 
     const listApi = {
-      path: 'permissions.applications.list',
+      path: 'permissions.routes.list',
     }
 
     this.loading(true)
     this.utils.request(api).then(userData => {
       this.utils.request(listApi).then(listData => {
-        this.utils.dispatch('INIT', {user: userData, applications: listData})
+        this.utils.dispatch('INIT', {user: userData, routes: listData})
         this.loading(false)
       })
     })
@@ -221,7 +235,7 @@ export default class MainContainer extends Component {
 
     this.setState({
       permissions: oldPermissions,
-      applications: this.props.applications,
+      routes: this.props.routes,
     })
   }
 
@@ -239,15 +253,15 @@ export default class MainContainer extends Component {
     return (
       <Main
         user={this.user}
-        applications={this.props.user.applications}
-        newApplication={this.state.newApplication}
+        routes={this.props.user.routes}
+        newRoute={this.state.newRoute}
         tool={this.state.tool}
         handleChange={(event, type) => this.handleChange(event, type)}
         submitChanges={() => this.submitChanges()}
         revertChanges={() => this.revertChanges()}
         permissionsComponent={this.createPermissionsComponent()}
         changeTool={tool => this.changeTool(tool)}
-        addNewApplication={app => this.addNewApplication(app)}
+        addNewRoute={route => this.addNewRoute(route)}
       />
     )
   }

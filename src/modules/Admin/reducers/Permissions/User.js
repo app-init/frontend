@@ -2,7 +2,7 @@ function User(state = {}, action) {
   switch (action.type) {
     case 'PERMISSIONS_USER_INIT': {
       let newState
-      if (action.applications === undefined) {
+      if (action.routes === undefined) {
         newState = {
           ...state,
           user: action.user,
@@ -11,7 +11,7 @@ function User(state = {}, action) {
         newState = {
           ...state,
           user: action.user,
-          applications: action.applications,
+          routes: action.routes,
         }
       }
       return Object.assign({}, state, newState)

@@ -8,9 +8,11 @@ class Permissions extends Component {
   }
 
   renderPermissionsTable() {
-    const userApps = Object.keys(this.props.applicationPermissions)
+    const userRoutes = Object.keys(this.props.routePermissions)
       .sort()
       .filter(name => name !== 'admin')
+
+    // TODO make dynamic
     const labels = {
       bzcompliance: <i className="fa fa-bug" />,
       jobs: <i className="fa fa-tasks" />,
@@ -20,26 +22,26 @@ class Permissions extends Component {
       'release-planning': <i className="fa fa-calendar" />,
     }
 
-    const tabHeader = userApps.map(app => {
-      const label = labels[app] !== undefined ? labels[app] : <i className="fa fa-cube" />
+    const tabHeader = userRoutes.map(route => {
+      const label = labels[route] !== undefined ? labels[route] : <i className="fa fa-cube" />
       return (
-        <a target={app} key={app}>
+        <a target={route} key={route}>
           <span>
-            {label} {app}
+            {label} {route}
           </span>
         </a>
       )
     })
 
     const tabBody = (
-      userApps.map(app => {
-        return this.createTabContent(app, this.getUserPermissions(app))
+      userRoutes.map(route => {
+        return this.createTabContent(route, this.getUserPermissions(route))
       })
     )
 
     const tabs = (
       <Tabs
-        current={userApps[0]} //Set the current tab to the first listed
+        current={userRoutes[0]} //Set the current tab to the first listed
         fill
       >
         <Tabs.Nav>
@@ -54,19 +56,19 @@ class Permissions extends Component {
     return tabs
   }
 
-  // returns user's permission data for an app that includes all the
-  // application permissions and default permissions initialized
-  getUserPermissions(app) {
+  // returns user's permission data for an route that includes all the
+  // route permissions and default permissions initialized
+  getUserPermissions(route) {
     // const userPermissions = this.props.permissions[app]
-    const userPermissions = this.props.permissions[app]
-    const applicationPermissions = this.props.applicationPermissions[app] || []
+    const userPermissions = this.props.permissions[route]
+    const routePermissions = this.props.routePermissions[route] || []
     const defaultPermissions = ['admin', 'moderator']
 
     const result = {...userPermissions}
 
-    // setting any application/default permissions
+    // setting any route/default permissions
     // not already in user's permissions as false
-    applicationPermissions.map(perm => {
+    routePermissions.map(perm => {
       if (result[perm] === undefined) {
         result[perm] = false
       }
@@ -81,7 +83,7 @@ class Permissions extends Component {
     return result
   }
 
-  createTabContent(app, permissions) {
+  createTabContent(route, permissions) {
     const header = (
       <tr>
         <th>Name</th>
@@ -89,16 +91,16 @@ class Permissions extends Component {
       </tr>
     )
 
-    const createPermissionRow = (app, perm) => {
+    const createPermissionRow = (route, perm) => {
       return (
-        <tr key={`${app}-${perm}`}>
+        <tr key={`${route}-${perm}`}>
           <td width="50%">
             {perm}
           </td>
           <td width="50%" style={{paddingLeft: '0px'}}>
             <Inputs.Switch
-              on={this.getUserPermissions(app)[perm] || false}
-              onChange={() => this.props.togglePermission(app, perm)}
+              value={this.getUserPermissions(route)[perm] || false}
+              // onChange={() => this.props.togglePermission(route, perm)}
             />
           </td>
         </tr>
@@ -106,11 +108,11 @@ class Permissions extends Component {
     }
 
     const permissionsList = Object.keys(permissions).sort().map(perm => {
-      return createPermissionRow(app, perm)
+      return createPermissionRow(route, perm)
     })
 
     return (
-      <div id={app} key={app}>
+      <div id={route} key={route}>
         <div className="row">
           <div className="col-lg-3">
             <table className="table table-hover issue-tracker">
@@ -123,7 +125,7 @@ class Permissions extends Component {
             </table>
           </div>
           <div className="col-lg-3">
-            {this.renderAddPermissionField(app)}
+            {this.renderAddPermissionField(route)}
           </div>
         </div>
       </div>
@@ -131,7 +133,7 @@ class Permissions extends Component {
   }
 
   // only show the field to add new permission if user is a system admin
-  renderAddPermissionField(app) {
+  renderAddPermissionField(route) {
     const isAdmin = this.utils.checkPermissions('system', 'admin')
     if (!isAdmin) {
       return <div />
@@ -140,15 +142,15 @@ class Permissions extends Component {
     return (
       <div>
         <Inputs.Text
-          value={this.props.inputs[app] || ''}
+          value={this.props.inputs[route] || ''}
           // value={'attempt'}
           placeholder={'Permission Name'}
-          onChange={e => this.props.handleInputChange(e, app)}
+          onChange={e => this.props.handleInputChange(e, route)}
         />
         <Button
           btnStyle="primary"
           style={{marginTop: '10px'}}
-          onClick={() => this.props.addAppPermission(app)}
+          onClick={() => this.props.addRoutePermission(route)}
         >
           Add
         </Button>
@@ -162,7 +164,7 @@ class Permissions extends Component {
 }
 
 Permissions.defaultProps = {
-  applicationPermissions: {},
+  routePermissions: {},
 }
 
 export default Permissions

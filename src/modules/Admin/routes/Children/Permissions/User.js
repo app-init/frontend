@@ -22,7 +22,7 @@ var route = {
 
     return {
       user: stateObj.user,
-      applications: stateObj.applications
+      routes: stateObj.routes
     }
   },
 
@@ -35,14 +35,14 @@ var route = {
         },
       },
       list: {
-        path: 'permissions.applications.list',
+        path: 'permissions.routes.list',
       }
     }
 
     return utils.request(api).then(data => {
       return data.user.then(user => {
-        return data.list.then(applications => {
-          let action = { user, applications }
+        return data.list.then(routes => {
+          let action = { user, routes }
 
           utils.dispatch('INIT', action, 'permissions.user')
 
