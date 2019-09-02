@@ -19,8 +19,9 @@ module.exports = {
   clientLogLevel: "info",
   host: '0.0.0.0',
   port: 3000,
-  contentBase: resolve(__dirname, 'dist'),
-  publicPath: '/',
+  contentBase: resolve(__dirname, '../dist'),
+  publicPath: 'http://0.0.0.0:3000/',
+  compress: true,
   historyApiFallback: true,
   proxy: {
     '/api': {

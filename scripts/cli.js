@@ -66,6 +66,7 @@ export function cli(args) {
     compiler.run(compilerCallback)
   } else {
     let server = new webpackDevServer(compiler, configDevServer)
+    // compiler.run(compilerCallback)
     server.listen(options.port, "localhost", function() {})
   }
 }
