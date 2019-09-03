@@ -3,10 +3,11 @@
 
 
 "@app-init/ui@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@app-init/ui/-/ui-1.0.1.tgz#1cbb7bc9613b0ce5b0930efc31b755e07d6389eb"
-  integrity sha512-wKJe/UP50DuBIRl8F7Rpt/VUX/EI51zzf6sFCLz7HHh5Gd6BYEk4CzDV6pkCYwY03GALQfJbHeOgyfV1OzuECA==
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@app-init/ui/-/ui-1.0.2.tgz#a940ec02095aa2b91db18a55266a6f8b1bf86bb1"
+  integrity sha512-H7+xOlvaOoQrWi2Bzfo+pGSrSHx0uGRRxYR4LRpqbRkuutDRglrV5W3tY6Oep2oKbZR+ibBGAd96Cfu7jSqQlw==
   dependencies:
+    "@fortawesome/fontawesome-pro" "^5.10.2"
     "@loadable/component" "^5.10.2"
     axios "^0.19.0"
     bootstrap "^4.3.1"
@@ -764,6 +765,11 @@
     esutils "^2.0.2"
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
+
+"@fortawesome/fontawesome-pro@^5.10.2":
+  version "5.10.2"
+  resolved "https://npm.fontawesome.com/@fortawesome/fontawesome-pro/-/fontawesome-pro-5.10.2.tgz#03092f3759af9aa7c1b4ef064e18ce35b4f6f9d6"
+  integrity sha512-cWDAbjzIqdEQAbQW/RK5bn1qDUs6pnz2TkJPvR+cTjZHnHlFOX+Zu1iUOEKab+HY38qyZyeA+1C675N+ee/rgg==
 
 "@hapi/address@2.x.x":
   version "2.0.0"
