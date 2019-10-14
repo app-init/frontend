@@ -27,7 +27,7 @@ class AppContainer extends React.Component {
         user: {
           path: 'users.get',
           data: {
-            kerberos: user,
+            uid: user,
           },
         },
         systemInfo: {
@@ -134,6 +134,7 @@ class AppContainer extends React.Component {
       <Layout
         loadingComponents={this.state.loadingComponents}
         loadingAPI={this.props.loadingAPI}
+        appTitle={this.props.systemInfo.variables['app-title']}
         {...newProps }
       />
     )
