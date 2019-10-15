@@ -23,8 +23,8 @@ export function cli(args) {
       if (config['route-configs'].length > 0) {
         for (let i in config['route-configs']) {
           let routeConfig = config['route-configs'][i].frontend
-        
-          if (config['route-configs'][i].active) {
+       
+          if (routeConfig && config['route-configs'][i].active) {
             routes.push(`  () => import(/* webpackChunkName: "${routeConfig.name}", webpackPrefetch: true */ '${routeConfig.name}/routes'),`)
           }
         }

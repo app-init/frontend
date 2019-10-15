@@ -40,7 +40,7 @@ export function cli(args) {
 
   for (let i in routes) {
     let routeConfig = routes[i].frontend
-    if (routes[i].active) {
+    if (routeConfig && routes[i].active) {
       webpackConfig.resolve.alias[routeConfig.name] = resolve(routeConfig.path)
     }
   }
