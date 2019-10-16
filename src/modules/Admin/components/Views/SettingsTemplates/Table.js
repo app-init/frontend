@@ -12,7 +12,7 @@ class TemplateTable extends Component {
         <thead>
           <tr>
             <th width="25%">Title</th>
-            <th width="25%">Application</th>
+            <th width="25%">Route</th>
             <th width="25%">Section</th>
             <th width="20%">Input Type</th>
             <th width="5%">Remove</th>
@@ -26,7 +26,7 @@ class TemplateTable extends Component {
                   {template.title}
                 </Link>
               </td>
-              <td>{template.application}</td>
+              <td>{template.route}</td>
               <td>{template.section}</td>
               <td>{template.inputType}</td>
               <td><Button btnStyle="danger" icon onClick={() => this.props.removeTemplate(template.id)}><i className="fa fa-times" /></Button></td>

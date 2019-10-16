@@ -27,7 +27,7 @@ class AddContainer extends Component {
     return (
       <TemplateForm
         type={this.type}
-        applications={this.props.applications}
+        routes={this.props.routes}
         submit={(template) => this.submit(template)}
         {...this.props}
       />

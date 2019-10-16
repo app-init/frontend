@@ -97,7 +97,7 @@ class TemplateInfo extends Component {
               template={this.props.template}
               close={() => this.changeTool('')}
               submit={(template) => this.submit(template)}
-              applications={this.props.applications}
+              routes={this.props.routes}
             />
           </div>
           <div key="placeholder" />

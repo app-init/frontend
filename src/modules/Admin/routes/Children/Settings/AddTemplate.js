@@ -19,20 +19,29 @@ const route = {
     data: SettingsReducer
   },
   mapStateToProps: (state) => {
+    let routes = []
+    let routeConfigs = state.dashboard.systemInfo.variables
+
+    for (let i in routeConfigs) {
+      if (routeConfigs[i].name) {
+        routes.push(routeConfigs[i].name)
+      }
+    }
+
     return {
-      applications: state.settings.applications
+      routes: routes
     }
   },
-  api: (utils) => {
-    const api = {
-      path: '/applications/list'
-    }
+  // api: (utils) => {
+  //   const api = {
+  //     path: '/applications/list'
+  //   }
 
-    return utils.request(api).then(data => {
-      return utils.dispatch('ADD', {data: data}, 'settings')
-    })
+  //   return utils.request(api).then(data => {
+  //     return utils.dispatch('ADD', {data: data}, 'settings')
+  //   })
 
-  }
+  // }
 }
 
 export default route

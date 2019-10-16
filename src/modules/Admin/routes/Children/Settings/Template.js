@@ -19,9 +19,17 @@ const route = {
     data: SettingsReducer
   },
   mapStateToProps: (state) => {
+    let routes = []
+    let routeConfigs = state.dashboard.systemInfo.variables
+
+    for (let i in routeConfigs) {
+      if (routeConfigs[i].name) {
+        routes.push(routeConfigs[i].name)
+      }
+    }
     return {
       template: state.settings.template,
-      applications: state.settings.applications
+      routes: state.settings.routes
     }
   },
   api: (utils, match) => {
@@ -32,19 +40,19 @@ const route = {
           name: match.params.name,
         }
       },
-      applications: {
-        path: '/applications/list'
-      }
+      // applications: {
+      //   path: '/applications/list'
+      // }
     }
     // return utils.request(api).then(data => {
     //   return utils.dispatch('TEMPLATE', {data: data}, 'settings')
     // })
     return utils.request(api).then(async (data) => {
       let  templates = await data.templates
-      let applications = await data.applications
+      // let applications = await data.applications
 
-      utils.dispatch('TEMPLATE', {data: templates}, 'settings')
-      return utils.dispatch('ADD', {data: applications}, 'settings')
+      return utils.dispatch('TEMPLATE', {data: templates}, 'settings')
+      // return utils.dispatch('ADD', {data: applications}, 'settings')
     })
   }
 }

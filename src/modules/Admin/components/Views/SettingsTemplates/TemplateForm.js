@@ -23,7 +23,7 @@ class AddTemplate extends Component {
       api: '',
       description: '',
       inputType: '',
-      application: '',
+      route: '',
       section: '',
       permissions: '',
       inputProps: {}
@@ -115,7 +115,7 @@ class AddTemplate extends Component {
       title: false,
       description: false,
       inputType: false,
-      application: false,
+      route: false,
       section: false,
       isDynamic: false,
     }
@@ -344,16 +344,16 @@ class AddTemplate extends Component {
                 />
               </div>
               <div className="col-lg-4">
-                <label form={this.props.name} id="application">Application</label>
+                <label form={this.props.name} id="route">Route</label>
                 <Inputs.Autocomplete
                   // ref="application"
                   minSearch={1}
-                  data={this.props.applications}
+                  data={this.props.routes}
                   // data-label="application"
                   // searchText={this.formData.application}
                   searchKey={'name'}
                   form={this.props.name}
-                  id="application"
+                  id="route"
                 />
               </div>
               <div className="col-lg-4">

@@ -22,22 +22,22 @@ export default class Settings extends Component {
           </div>
           <div key="notifications">
             <Section
-              applicationSettings={this.props.templates.settings['notifications'] || {}}
-              applicationTitles={this.props.templates.appTitles}
+              routeSettings={this.props.templates.settings['notifications'] || {}}
+              routeTitles={this.props.templates.routeTitles}
               settings={this.props.settings}
             />
           </div>
           <div key="general">
             <Section
-              applicationSettings={this.props.templates.settings['general'] || {}}
-              applicationTitles={this.props.templates.appTitles}
+              routeSettings={this.props.templates.settings['general'] || {}}
+              routeTitles={this.props.templates.routeTitles}
               settings={this.props.settings}
             />
           </div>
           <div key="advanced">
             <Section
-              applicationSettings={this.props.templates.settings['advanced'] || {}}
-              applicationTitles={this.props.templates.appTitles}
+              routeSettings={this.props.templates.settings['advanced'] || {}}
+              routeTitles={this.props.templates.routeTitles}
               settings={this.props.settings}
             />
           </div>
@@ -52,7 +52,7 @@ export default class Settings extends Component {
         <Card.Title>
           <div className="row">
             <div className="col-lg-12 text-left">
-              <img src={this.props.user.picture} className="pull-left lgi-img" />
+              <img src={this.props.user.metadata.picture} className="pull-left lgi-img" />
               <h3
                 style={{
                   marginTop: '5px',

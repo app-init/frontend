@@ -13,7 +13,7 @@ class InfoContainer extends Component {
     return (
       <TemplateInfo
         template={this.props.template}
-        applications={this.props.applications}
+        routes={this.props.routes}
       />
     )
   }

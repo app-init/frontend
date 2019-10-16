@@ -55,7 +55,7 @@ class LogsContainer extends Component {
       stateObj.search[type] = event.searchText
       // console.log(event.target.value, type)
     }
-    this.setState(...stateObj)
+    this.setState(stateObj)
     this.forceUpdate()
   }
 

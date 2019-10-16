@@ -17,19 +17,19 @@ class Section extends Component {
   }
 
   initializeForm(form) {
-    const { applicationSettings, settings } = this.props
-    Object.keys(applicationSettings).forEach(app => {
-      applicationSettings[app].forEach(setting => {
+    const { routeSettings, settings } = this.props
+    Object.keys(routeSettings).forEach(route => {
+      routeSettings[route].forEach(setting => {
         const { name } = setting
-        if (settings[app] !== undefined && settings[app][name] !== undefined) {
-          form[name] = this.getSettingValue({ app, ...setting, settings })
+        if (settings[route] !== undefined && settings[route][name] !== undefined) {
+          form[name] = this.getSettingValue({ route, ...setting, settings })
         }
       })
     })
   }
 
-  getSettingValue({ app, name, type, isMulti, settings }) {
-    const values = settings[app][name]
+  getSettingValue({ route, name, type, isMulti, settings }) {
+    const values = settings[route][name]
     if (isMulti) {
       return values
     } else {
@@ -48,12 +48,12 @@ class Section extends Component {
 
   initializeSelections() {
     const selections = {}
-    const { applicationSettings, settings } = this.props
-    Object.keys(applicationSettings).forEach(app => {
-      applicationSettings[app].filter(setting => setting.isMulti === true).forEach(setting => {
+    const { routeSettings, settings } = this.props
+    Object.keys(routeSettings).forEach(route => {
+      routeSettings[route].filter(setting => setting.isMulti === true).forEach(setting => {
         const { name } = setting
-        if (settings[app] !== undefined && settings[app][name] !== undefined) {
-          selections[name] = this.getSettingValue({ app, ...setting, settings })
+        if (settings[route] !== undefined && settings[route][name] !== undefined) {
+          selections[name] = this.getSettingValue({ route, ...setting, settings })
         }
       })
     })
@@ -66,7 +66,7 @@ class Section extends Component {
     this.forceUpdate()
   }
 
-  renderAppSettings(settings, formProps) {
+  renderRouteSettings(settings, formProps) {
     return settings.map(setting =>
       (<Setting
         key={setting.name}
@@ -129,28 +129,28 @@ class Section extends Component {
       selections: this.selections,
     }
 
-    const { applicationSettings, applicationTitles } = this.props
+    const { routeSettings, routeTitles } = this.props
 
     return (
       <div>
-        {Object.keys(applicationSettings).map(app =>
-          (<div key={app} style={{ marginLeft: '10px' }}>
+        {Object.keys(routeSettings).map(route =>
+          (<div key={route} style={{ marginLeft: '10px' }}>
             <div className="row">
               <h3>
-                <a id={app} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <a id={route} style={{ textDecoration: 'none', color: 'inherit' }}>
                   <b>
-                    {applicationTitles[app] || _.startCase(app)}
+                    {routeTitles[route] || _.startCase(route)}
                   </b>
                 </a>
               </h3>
             </div>
             <div style={{ marginLeft: '40px' }}>
-              {this.renderAppSettings(applicationSettings[app], formProps)}
+              {this.renderRouteSettings(routeSettings[route], formProps)}
             </div>
           </div>)
         )}
         <div className="row" style={{ marginTop: '20px', marginLeft: '30px' }}>
-          {Object.keys(applicationSettings).length > 0
+          {Object.keys(routeSettings).length > 0
             ? <Button btnStyle="primary" onClick={() => this.handleSubmit()}>
               Save
             </Button>
